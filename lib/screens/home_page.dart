@@ -19,8 +19,9 @@ class PlayButton extends StatelessWidget {
           onPressed: () => Navigator.pushNamed(context, '/second'),
           child: const Text('Play!'),
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
-          ),
+            primary: Colors.blue, 
+            textStyle: const TextStyle(fontSize: 20), 
+            padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 50)),
       ),
     );
   }
