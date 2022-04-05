@@ -47,7 +47,7 @@ Padding Options(String answer) {
     child: ElevatedButton(
       onPressed: () => {},
       child: Text(answer, style: const TextStyle(color: Colors.black)),
-      style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), primary: Colors.white, textStyle: const TextStyle(fontSize: 22), padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 50)),
+      style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), primary: Colors.white, textStyle: const TextStyle(fontSize: 22), padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 30)),
     ),
   );
 }
