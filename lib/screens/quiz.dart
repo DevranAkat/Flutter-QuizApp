@@ -29,17 +29,27 @@ class QuizPage extends StatelessWidget {
             ),
             color: Colors.transparent,
             elevation: 0.0,
-            margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0),
+            margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0, bottom: 5.0),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
-            child: ElevatedButton(
-              onPressed: () => {},
-              child: const Text('Answer 1!', style: TextStyle(color: Colors.black)),
-              style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), primary: Colors.white, textStyle: const TextStyle(fontSize: 20), padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 50)),
-            ),
-          ),
+          Options(),
+          Options(),
+          Options(),
+          Options(),
         ],
+      ),
+    );
+  }
+}
+
+class Options extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+      child: ElevatedButton(
+        onPressed: () => {},
+        child: const Text('Answer 1!', style: TextStyle(color: Colors.black)),
+        style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), primary: Colors.white, textStyle: const TextStyle(fontSize: 20), padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 50)),
       ),
     );
   }
