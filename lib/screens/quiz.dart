@@ -31,26 +31,23 @@ class QuizPage extends StatelessWidget {
             elevation: 0.0,
             margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0, bottom: 5.0),
           ),
-          Options(),
-          Options(),
-          Options(),
-          Options(),
+          Options("Answer 1"),
+          Options("Answer 2"),
+          Options("Answer 3"),
+          Options("Answer 4"),
         ],
       ),
     );
   }
 }
 
-class Options extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-      child: ElevatedButton(
-        onPressed: () => {},
-        child: const Text('Answer 1!', style: TextStyle(color: Colors.black)),
-        style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), primary: Colors.white, textStyle: const TextStyle(fontSize: 20), padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 50)),
-      ),
-    );
-  }
+Padding Options(String answer) {
+  return Padding(
+    padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+    child: ElevatedButton(
+      onPressed: () => {},
+      child: Text(answer, style: TextStyle(color: Colors.black)),
+      style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50), primary: Colors.white, textStyle: const TextStyle(fontSize: 22), padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 50)),
+    ),
+  );
 }
