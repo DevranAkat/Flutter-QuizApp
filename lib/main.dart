@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFF222831),
       ),
       routes: {
-        '/': (context) => HomePage(),
-        '/second': (context) => QuizPage(),
+        '/': (context) => const HomePage(),
+        '/second': (context) => const QuizPage(),
       },
       initialRoute: '/',
     );
