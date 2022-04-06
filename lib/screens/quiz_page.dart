@@ -30,12 +30,15 @@ class QuizPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-              child: Text(
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                  style: const TextStyle(color: Colors.white, fontSize: 26),
+                ),
               ),
             ),
-            Options("Answer 1"),
+            Options("Answer 1, Lorem Ipsum is simply dummy text of the"),
             Options("Answer 2"),
             Options("Answer 3"),
             Options("Answer 4"),
@@ -51,10 +54,19 @@ Padding Options(String answer) {
     padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
     child: ElevatedButton(
       onPressed: () => {},
-      child: Text(answer, style: const TextStyle(color: Colors.black)),
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(
+          answer,
+          style: const TextStyle(
+            color: Color(0xFF222831),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       style: ElevatedButton.styleFrom(
         minimumSize: const Size.fromHeight(50),
-        primary: Colors.white,
+        primary: Color(0xFFEF7B45),
         textStyle: const TextStyle(fontSize: 22),
         padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 30),
         shape: RoundedRectangleBorder(
