@@ -28,14 +28,7 @@ const List questions = [
     "answer_index": 2,
   },
 ];
-
-final String q1 = questions[0]['question'];
-
-String xx =  questions[0]['question'];
-  String getQuestion()
-  {
-    return questions[0]['question'];
-  }
+var questionsNumber = 0;
 
 class QuizPage extends StatelessWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -69,17 +62,14 @@ class QuizPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: AutoSizeText(
-                  questions[0]['question'],
+                  questions[questionsNumber]['question'],
                   style: TextStyle(fontSize: 24, color: Colors.white),
                   minFontSize: 14,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-            Options("Answer 1, Lorem asd  da sd asd sad ssssss ddddd dsadsa Lorem asd  da sd asd sad ssssss ddddd aadsad ddsadsad Ipsum is simply dummy text of the"),
-            Options("Answer 2"),
-            Options("Answer 3"),
-            Options("Answer 4"),
+              for (var q in questions[questionsNumber]['options']) Options(q),
           ],
         ),
       ),
