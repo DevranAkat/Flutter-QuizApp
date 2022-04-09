@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+
 
 const List questions = [
   {
@@ -29,12 +31,15 @@ const List questions = [
   },
 ];
 var questionsNumber = 0;
+var questionsLength = questions.length.toString();
+var percentage = (questionsNumber+1)/questions.length;
 
 class QuizPage extends StatelessWidget {
   const QuizPage({Key? key}) : super(key: key);
  
   @override
   Widget build(BuildContext context) {
+  // ignore: avoid_print
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -60,16 +65,33 @@ class QuizPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: AutoSizeText(
                   questions[questionsNumber]['question'],
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+                  style: const TextStyle(fontSize: 24, color: Colors.white),
                   minFontSize: 14,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              for (var q in questions[questionsNumber]['options']) Options(q),
+              for(var q in questions[questionsNumber]['options']) Options(q),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 25),
+                child: LinearPercentIndicator(
+                  lineHeight: 35.0,
+                  percent: percentage,
+                  center: Text(
+                    (questionsNumber+1).toString() + "/" + questionsLength.toString(),
+                     style: const TextStyle(
+                       color: Colors.white,
+                       fontSize: 18,
+                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  backgroundColor: const Color(0xFF222831),
+                  progressColor: const Color(0xFFEF7B45),
+                ),
+              ),
           ],
         ),
       ),
