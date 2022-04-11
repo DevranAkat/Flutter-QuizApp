@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-
 const List questions = [
   {
     "id": 1,
@@ -13,7 +12,7 @@ const List questions = [
   },
   {
     "id": 2,
-    "question": "When google release Flutter.",
+    "question": "When did google release Flutter.",
     "options": ['Jun 2017', 'Jun 2017', 'May 2017', 'May 2018'],
     "answer_index": 2,
   },
@@ -32,14 +31,24 @@ const List questions = [
 ];
 var questionsNumber = 0;
 var questionsLength = questions.length.toString();
-var percentage = (questionsNumber+1)/questions.length;
 
-class QuizPage extends StatelessWidget {
+class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
- 
+
+  @override
+  State<QuizPage> createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  
+refresh() {
+  setState(() {});
+}
+
   @override
   Widget build(BuildContext context) {
-  // ignore: avoid_print
+    int questionsLength = questions.length;
+    print("Q number: $questionsNumber");
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -74,24 +83,8 @@ class QuizPage extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              for(var q in questions[questionsNumber]['options']) Options(q),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 25),
-                child: LinearPercentIndicator(
-                  lineHeight: 35.0,
-                  percent: percentage,
-                  center: Text(
-                    (questionsNumber+1).toString() + "/" + questionsLength.toString(),
-                     style: const TextStyle(
-                       color: Colors.white,
-                       fontSize: 18,
-                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  backgroundColor: const Color(0xFF222831),
-                  progressColor: const Color(0xFFEF7B45),
-                ),
-              ),
+              for(var q in questions[questionsNumber]['options']) Options(option: q, updateParent: refresh ),
+              progressBar(questionsNumber, questionsLength),
           ],
         ),
       ),
@@ -99,13 +92,49 @@ class QuizPage extends StatelessWidget {
   }
 }
 
-Padding Options(String answer) {
-  return Padding(
+Padding progressBar(int qNumber, int qLength) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 25),
+      child: LinearPercentIndicator(
+        lineHeight: 35.0,
+        percent: (qNumber+1)/qLength,
+        center: Text(
+          (qNumber+1).toString() + "/" + qLength.toString(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: const Color(0xFF222831),
+        progressColor: const Color(0xFFEF7B45),
+      ),
+    );
+  }
+
+class Options extends StatefulWidget {
+  final String option;
+  final Function() updateParent;
+  const Options({ Key? key, required this.option, required this.updateParent }): super(key: key);
+
+  @override
+  State<Options> createState() => _OptionsState();
+}
+
+class _OptionsState extends State<Options> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
     padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
     child: ElevatedButton(
-      onPressed: () => {},
+      onPressed: () {
+          setState((){
+            questionsNumber += 1;
+            widget.updateParent();
+        });
+      },
       child: AutoSizeText(
-        answer,
+        widget.option,
         style: const TextStyle(
           fontSize: 22, color: Color(0xFF222831),
           fontWeight: FontWeight.bold),
@@ -124,4 +153,36 @@ Padding Options(String answer) {
       ),
     ),
   );
+  }
 }
+
+// Padding options(String options) {
+//   return Padding(
+//     padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+//     child: ElevatedButton(
+//       onPressed: () {
+//           setState((){
+//             questionsNumber += 1;
+//         });
+//       },
+//       child: AutoSizeText(
+//         options,
+//         style: const TextStyle(
+//           fontSize: 22, color: Color(0xFF222831),
+//           fontWeight: FontWeight.bold),
+//           minFontSize: 10,
+//           maxLines: 3,
+//           overflow: TextOverflow.visible,
+//       ),
+//       style: ElevatedButton.styleFrom(
+//         minimumSize: const Size.fromHeight(50),
+//         primary: const Color(0xFFEF7B45),
+//         textStyle: const TextStyle(fontSize: 22),
+//         padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 30),
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(15),
+//         ),
+//       ),
+//     ),
+//   );
+// }
